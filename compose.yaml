@@ -1,0 +1,6 @@
+﻿services:
+  elecon.presentation:
+    image: elecon.presentation
+    build:
+      context: .
+      dockerfile: ELECON.Presentation/Dockerfile
