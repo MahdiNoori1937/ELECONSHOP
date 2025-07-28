@@ -13,7 +13,7 @@ public class UserConfig:IEntityTypeConfiguration<ELECON.Domain.Entities.User.Use
        builder.Property(c=>c.IsDelete).IsRequired();
        
        
-       builder.Property(c=>c.FristName).IsRequired(false).HasMaxLength(50);
+       builder.Property(c=>c.FirstName).IsRequired(false).HasMaxLength(50);
        builder.Property(c=>c.LastName).IsRequired(false).HasMaxLength(50);
        builder.Property(c=>c.Pasword).IsRequired(false).HasMaxLength(300);
        builder.Property(c=>c.Email).IsRequired(false).HasMaxLength(100);

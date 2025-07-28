@@ -6,7 +6,7 @@ namespace ELECON.Domain.Entities.User;
 
 public class User:BaseEntities<int>
 {
-    public string FristName { get; set; }
+    public string FirstName { get; set; }
     public string LastName { get; set; }
     public string PhoneNumber { get; set; }
     public string Email { get; set; }
