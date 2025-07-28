@@ -1,0 +1,22 @@
+# This is a generated file. Not intended for manual editing.
+version: "3.9"
+services:
+  web:
+    build:
+      context: "E:\\Programing\\MainProject\\NewEleconShop"
+      dockerfile: "ELECON.Presentation/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/ELECON.Presentation.dll"
+    environment:
+      ASPNETCORE_STATICWEBASSETS: "/app/bin/Debug/net8.0/ELECON.Presentation.staticwebassets.runtime.CT.json"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "elecon.presentation:dev"
+    ports: []
+    volumes:
+    - "E:\\Programing\\MainProject\\NewEleconShop\\ELECON.Presentation:/app:rw"
+    - "E:\\Programing\\MainProject\\NewEleconShop:/src:rw"
+    - "C:\\Users\\Iranian\\.nuget\\packages:/home/app/.nuget/packages"
+    working_dir: "/app"

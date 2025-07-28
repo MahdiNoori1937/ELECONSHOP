@@ -1,9 +1,19 @@
+using Elecon.Infrastructure.ShopContext;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-var app = builder.Build();
+builder.Services.AddDbContext<ShopContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ELECON_SHOPConnectionStrings"));
+});
+
+
+
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

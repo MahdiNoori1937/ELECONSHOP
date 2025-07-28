@@ -1,6 +1,33 @@
-﻿services:
-  elecon.presentation:
-    image: elecon.presentation
+﻿version: '3.9'
+name: Elecon
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver_container_Elecon
+    environment:
+      SA_PASSWORD: "m@hdi.sds13211"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - C:\Users\Iranian\Desktop\sql\log:/var/opt/mssql/log
+    restart: on-failure
+
+  web:
     build:
       context: .
       dockerfile: ELECON.Presentation/Dockerfile
+    container_name: Elecon_Shop
+    depends_on:
+      - sqlserver
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=Elecon;User Id=sa;Password=m@hdi.sds13211;TrustServerCertificate=true"
+    ports:
+      - "5000:5000"
+    restart: on-failure
+
+
+volumes:
+  sql_data:
