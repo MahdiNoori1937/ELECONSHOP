@@ -31,12 +31,13 @@
                                             <form action="" id="form-auth">
 
                                                 <div class="comment-item mt-4 ">
-                                                    <input type="email" class="form-control" id="username">
-                                                    <label for="username" class="form-label label-float">لطفا شماره موبایل یا ایمیل خود را وارد کنید</label>
+                                                    <input  class="form-control userInput" id="Register-input">
+                                                    <label for="Register-input" class="form-label label-float">لطفا شماره موبایل یا ایمیل خود را وارد کنید</label>
+                                                    <p id="message" style="color:red;"></p>
                                                 </div>
                                                 
                                                 <div class="form-group mt-4">
-                                                    <button asp-controller="Login" asp-action="PasswordLogin" type="button" class="btn main-color-one-bg border-0 w-100 d-block py-3">ورود / ثبت نام</button>
+                                                    <button asp-controller="Login" asp-action="PasswordLogin" type="button" onclick="RegisterValidation(event)" class="btn main-color-one-bg border-0 w-100 d-block py-3">ورود / ثبت نام</button>
                                                 </div>
 
                                             </form>
@@ -46,6 +47,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                             </div>
 
                         </div>

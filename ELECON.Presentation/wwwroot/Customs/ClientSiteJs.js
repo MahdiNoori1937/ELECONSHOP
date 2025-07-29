@@ -481,3 +481,22 @@ function SetPaymentValue(Id)
   
    
 }
+function RegisterValidation(e)
+{
+    e.preventDefault();
+    const RegisterInput =document.querySelector('#Register-input').value;
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^(\+98|0)?9\d{9}$/;
+
+
+    if (!emailRegex.test(RegisterInput) && !phoneRegex.test(RegisterInput))
+    {
+        swal.fire({
+            title: "عملیات ناموفق",
+            text: "لطفا به صورت موبایل یا ایمیل وارد کنید",
+            icon: `warning`
+        })
+    }
+    
+}

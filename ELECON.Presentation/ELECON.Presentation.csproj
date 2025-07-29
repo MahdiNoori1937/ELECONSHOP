@@ -33,6 +33,7 @@
     <ItemGroup>
       <ProjectReference Include="..\ELECON.Application\ELECON.Application.csproj" />
       <ProjectReference Include="..\Elecon.Infrastructure\Elecon.Infrastructure.csproj" />
+      <ProjectReference Include="..\ELECON.IOC\ELECON.IOC.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -70,4 +70,18 @@ public class UserRepository:IUserRepository
        IEnumerable<User> user = await _db.QueryAsync<User>("dbo.sp_CreateUser", parameters, commandType: CommandType.StoredProcedure);
        return user.FirstOrDefault();
     }
+
+    #region FindByEmailOrNumberAsync
+
+    public async Task<User> FindByEmailOrNumberAsync(string input,string type)
+    {
+        DynamicParameters parameters = new();
+        parameters.Add("@input", input,DbType.String);
+        parameters.Add("@type", type,DbType.String);
+        IEnumerable<User> user = await _db.QueryAsync<User>("Get_GetUserByInput", 
+            parameters, commandType: CommandType.StoredProcedure);
+        return user.FirstOrDefault();
+    }
+
+    #endregion
 }
