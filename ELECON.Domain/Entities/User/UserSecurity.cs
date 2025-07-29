@@ -14,7 +14,7 @@ public class UserSecurity
 
     public int FailedLoginAttempts { get; set; }
 
-
+    public string SMTPCode { get; set; }
     public int UserId { get; set; }
 
     public User User { get; set; }

@@ -31,7 +31,18 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\ELECON.Application\ELECON.Application.csproj" />
       <ProjectReference Include="..\Elecon.Infrastructure\Elecon.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Home\Login\Login.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Home\Login\PasswordLogin.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Home\Login\SMTPLogin.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Views\Login\Login.cshtml" />
     </ItemGroup>
 
 </Project>

@@ -1,0 +1,72 @@
+﻿
+@{
+    Layout = "_LoginLayout";
+}
+
+<div class="content vh-100">
+    <div class="container-fluid h-100">
+
+        <div class="auth h-100 d-flex align-items-center">
+            <div class="container-fluid">
+                <div class="auth-items">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="row align-items-center bg-white rounded-3 g-0 shadow-2xl">
+                                <div class="col-lg-6">
+                                    <div class="login-vector bg-white text-center">
+                                        <img src="/Customer/img/login-vector.jpg" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="auth-parent py-3">
+                                        <div class="auth-logo text-center">
+                                            <a href="">
+                                                <img src="/Customer/img/logo.png" width="200" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="auth-form bg-white">
+
+                                            <div class="alert text-center alert-success">
+                                                یک کد برای شما پیامک شد لطفا آن را وارد کنید
+                                            </div>
+
+                                            <div id="otp-input">
+                                                <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
+                                                <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
+                                                <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
+                                                <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
+                                                <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
+                                                <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
+                                                <input id="otp-value" placeholder="_" type="hidden" name="otp" />
+                                            </div>
+
+
+                                            <!-- Countdown timer html -->
+                                            <div class="countDownContainer">
+                                                <div class="countdown-bar" id="countdownB">
+                                                    <div></div>
+                                                    <div></div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group mt-4">
+                                                <button type="submit" id="submit" class="btn main-color-one-bg d-block w-100 py-3">وورد به
+                                                    سایت
+                                                </button>
+                                            </div>
+
+                                            <p class="loginTermsDesc mt-4">ورود شما به معنای پذیرش<a class="mx-1 inline-block main-color-one-color" href="/page/terms/">شرایط راستچین</a>و<a class="mx-1 inline-block main-color-one-color" href="/page/privacy/">قوانین حریم‌خصوصی</a>است</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -2,10 +2,13 @@
 
 namespace ELECON.Presentation.Controllers;
 
-public class Home : Controller
+public class HomeController : Controller
 {
-    public IActionResult Index()
+
+    public IActionResult Home()
     {
         return View();
     }
+  
+ 
 }

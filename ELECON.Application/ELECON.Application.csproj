@@ -6,4 +6,12 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Feature\User\Command\" />
+      <Folder Include="Feature\User\Handler\" />
+      <Folder Include="Feature\User\MappingProfiles\" />
+      <Folder Include="Feature\User\Queries\" />
+      <Folder Include="Feature\User\Validators\" />
+    </ItemGroup>
+
 </Project>

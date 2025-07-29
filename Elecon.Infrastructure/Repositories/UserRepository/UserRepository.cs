@@ -27,8 +27,6 @@ public class UserRepository:IUserRepository
         parameters.Add("@PhoneNumber", parameter.PhoneNumber,DbType.String);
         parameters.Add("@UserStatus", parameter.UserStatus,DbType.String);
         parameters.Add("@UserProfileImage", parameter.UserProfileImage,DbType.String);
-        parameters.Add("@CreateDate", parameter.CreateDate,DbType.DateTime);
-        parameters.Add("@IsDelete", parameter.IsDelete,DbType.Boolean);
         parameters.Add("@Result",null,DbType.String, ParameterDirection.Output);
         
         await _db.ExecuteAsync("dbo.sp_CreateUser", parameters, commandType: CommandType.StoredProcedure);
@@ -48,11 +46,10 @@ public class UserRepository:IUserRepository
         parameters.Add("@PhoneNumber", parameter.PhoneNumber,DbType.String);
         parameters.Add("@UserStatus", parameter.UserStatus,DbType.String);
         parameters.Add("@UserProfileImage", parameter.UserProfileImage,DbType.String);
-        parameters.Add("@CreateDate", parameter.CreateDate,DbType.DateTime);
         parameters.Add("@IsDelete", parameter.IsDelete,DbType.Boolean);
         parameters.Add("@Result",null,DbType.String, ParameterDirection.Output);
         
-        await _db.ExecuteAsync("dbo.sp_CreateUser", parameters, commandType: CommandType.StoredProcedure);
+        await _db.ExecuteAsync("Update_User", parameters, commandType: CommandType.StoredProcedure);
         
         return parameters.Get<string>("@Result");
     }
@@ -62,7 +59,7 @@ public class UserRepository:IUserRepository
         DynamicParameters parameters = new();
         parameters.Add("@Id", id,DbType.Int32);
         parameters.Add("@Result",null,DbType.String, ParameterDirection.Output);
-        await _db.ExecuteAsync("dbo.sp_CreateUser", parameters, commandType: CommandType.StoredProcedure);
+        await _db.ExecuteAsync("Delete_User", parameters, commandType: CommandType.StoredProcedure);
         return parameters.Get<string>("@Result");
     }
 
