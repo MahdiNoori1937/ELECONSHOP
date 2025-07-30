@@ -1,4 +1,5 @@
 using Elecon.Infrastructure.ShopContext;
+using EleconShop.Domain.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<ShopContext>(options =>
 
 
 WebApplication app = builder.Build();
+builder.Services.Configure<MeliPayamak>(builder.Configuration.GetSection("MeliPayamak"));
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

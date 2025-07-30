@@ -15,7 +15,7 @@ public class UserLoginHistoryRepository:IUserLoginHistoryRepository
     {
         _db = new SqlConnection(config.GetConnectionString("ELECON_SHOPConnectionStrings"));
     }
-    public async Task<string> Add(UserLoginHistory parameter, string connectionString)
+    public async Task<string> Add(UserLoginHistory parameter)
     {
         DynamicParameters parameters = new ();
         parameters.Add("@UserId", parameter.UserId, DbType.Int32);
@@ -31,7 +31,7 @@ public class UserLoginHistoryRepository:IUserLoginHistoryRepository
         return parameters.Get<string>("@Result");
     }
 
-    public async Task<string> Update(UserLoginHistory parameter, string connectionString)
+    public async Task<string> Update(UserLoginHistory parameter)
     {
         DynamicParameters parameters = new ();
         parameters.Add("@Id", parameter.Id, DbType.Int32);
@@ -48,7 +48,7 @@ public class UserLoginHistoryRepository:IUserLoginHistoryRepository
         return parameters.Get<string>("@Result");
     }
 
-    public async Task<string> Delete(int id, string connectionString)
+    public async Task<string> Delete(int id)
     {
         DynamicParameters parameters = new ();
         parameters.Add("@Id", id,DbType.Int32);
@@ -59,7 +59,7 @@ public class UserLoginHistoryRepository:IUserLoginHistoryRepository
         return parameters.Get<string>("@Result");
     }
 
-    public async Task<UserLoginHistory> Get(int Id, string connectionString)
+    public async Task<UserLoginHistory> Get(int Id)
     {
         DynamicParameters parameters = new();
         parameters.Add("@Id", Id,DbType.Int32);

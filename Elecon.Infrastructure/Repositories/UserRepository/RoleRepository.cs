@@ -16,7 +16,7 @@ public class RoleRepository:IRoleRepository
         _db = new SqlConnection(config.GetConnectionString("ELECON_SHOPConnectionStrings"));
     }
     
-    public async Task<string> Add(Role parameter, string connectionString)
+    public async Task<string> Add(Role parameter)
     {
         DynamicParameters parameters = new ();
         parameters.Add("@CreateDate", parameter.CreateDate, DbType.DateTime);
@@ -29,7 +29,7 @@ public class RoleRepository:IRoleRepository
         return parameters.Get<string>("@Result");
     }
 
-    public async Task<string> Update(Role parameter, string connectionString)
+    public async Task<string> Update(Role parameter)
     {
         DynamicParameters parameters = new ();
         parameters.Add("@Id", parameter.Id,DbType.Int32);
@@ -43,7 +43,7 @@ public class RoleRepository:IRoleRepository
         return parameters.Get<string>("@Result");
     }
 
-    public async Task<string> Delete(int id, string connectionString)
+    public async Task<string> Delete(int id)
     {
         DynamicParameters parameters = new ();
         parameters.Add("@Id", id,DbType.Int32);
@@ -54,7 +54,7 @@ public class RoleRepository:IRoleRepository
         return parameters.Get<string>("@Result");
     }
 
-    public async Task<Role> Get(int Id, string connectionString)
+    public async Task<Role> Get(int Id)
     {
         DynamicParameters parameters = new();
         parameters.Add("@Id", Id,DbType.Int32);

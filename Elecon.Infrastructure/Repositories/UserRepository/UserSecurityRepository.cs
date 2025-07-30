@@ -15,7 +15,7 @@ public class UserSecurityRepository:IUserSecurityRepository
     {
         _db = new SqlConnection(config.GetConnectionString("ELECON_SHOPConnectionStrings"));
     }
-    public async Task<string> Add(UserSecurity parameter, string connectionString)
+    public async Task<string> Add(UserSecurity parameter)
     {
         DynamicParameters parameters = new ();
         parameters.Add("@UserId", parameter.UserId, DbType.Int32);
@@ -33,7 +33,7 @@ public class UserSecurityRepository:IUserSecurityRepository
         return parameters.Get<string>("@Result");
     }
 
-    public async Task<string> Update(UserSecurity parameter, string connectionString)
+    public async Task<string> Update(UserSecurity parameter)
     {
         DynamicParameters parameters = new ();
         parameters.Add("@id", parameter.Id, DbType.Int32);
@@ -52,7 +52,7 @@ public class UserSecurityRepository:IUserSecurityRepository
         return parameters.Get<string>("@Result");
     }
 
-    public async Task<string> Delete(int id, string connectionString)
+    public async Task<string> Delete(int id)
     {
         DynamicParameters parameters = new ();
         parameters.Add("@id", id,DbType.Int32);
@@ -63,7 +63,7 @@ public class UserSecurityRepository:IUserSecurityRepository
         return parameters.Get<string>("@Result");
     }
 
-    public async Task<UserSecurity> Get(int Id, string connectionString)
+    public async Task<UserSecurity> Get(int Id)
     {
         DynamicParameters parameters = new();
         parameters.Add("@Id", Id,DbType.Int32);

@@ -16,7 +16,7 @@ public class UserRepository:IUserRepository
         _db = new SqlConnection(config.GetConnectionString("ELECON_SHOPConnectionStrings"));
     }
 
-    public async Task<string> Add(User parameter, string connectionString)
+    public async Task<string> Add(User parameter)
     {
         DynamicParameters parameters = new();
         parameters.Add("@RoleId", parameter.RoleId);
@@ -34,7 +34,7 @@ public class UserRepository:IUserRepository
         return parameters.Get<string>("@Result");
     }
 
-    public async Task<string> Update(User parameter, string connectionString)
+    public async Task<string> Update(User parameter)
     {
         DynamicParameters parameters = new();
         parameters.Add("@Id", parameter.Id,DbType.Int32);
@@ -54,7 +54,7 @@ public class UserRepository:IUserRepository
         return parameters.Get<string>("@Result");
     }
 
-    public async Task<string> Delete(int id ,string connectionString)
+    public async Task<string> Delete(int id )
     {
         DynamicParameters parameters = new();
         parameters.Add("@Id", id,DbType.Int32);
@@ -63,21 +63,20 @@ public class UserRepository:IUserRepository
         return parameters.Get<string>("@Result");
     }
 
-    public async Task<User?> Get(int id, string connectionString)
+    public async Task<User?> Get(int id)
     {
         DynamicParameters parameters = new();
         parameters.Add("@Id", id,DbType.Int32);
        IEnumerable<User> user = await _db.QueryAsync<User>("dbo.sp_CreateUser", parameters, commandType: CommandType.StoredProcedure);
        return user.FirstOrDefault();
     }
-
+    
     #region FindByEmailOrNumberAsync
 
-    public async Task<User> FindByEmailOrNumberAsync(string input,string type)
+    public async Task<User> FindByEmailOrNumberAsync(string input)
     {
         DynamicParameters parameters = new();
         parameters.Add("@input", input,DbType.String);
-        parameters.Add("@type", type,DbType.String);
         IEnumerable<User> user = await _db.QueryAsync<User>("Get_GetUserByInput", 
             parameters, commandType: CommandType.StoredProcedure);
         return user.FirstOrDefault();

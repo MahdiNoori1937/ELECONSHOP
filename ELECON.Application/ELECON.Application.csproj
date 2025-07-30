@@ -7,11 +7,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Feature\User\Command\" />
-      <Folder Include="Feature\User\Handler\" />
       <Folder Include="Feature\User\MappingProfiles\" />
       <Folder Include="Feature\User\Queries\" />
       <Folder Include="Feature\User\Validators\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="13.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ELECON.Domain\ELECON.Domain.csproj" />
     </ItemGroup>
 
 </Project>

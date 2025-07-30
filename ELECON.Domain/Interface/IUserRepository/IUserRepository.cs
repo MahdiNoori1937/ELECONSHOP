@@ -5,5 +5,5 @@ namespace ELECON.Domain.Interface.IUserRepository;
 
 public interface IUserRepository:ISharedRepository<User>
 {
-    Task<User> FindByEmailOrNumberAsync(string input, string type);
+    Task<User> FindByEmailOrNumberAsync(string input);
 }
