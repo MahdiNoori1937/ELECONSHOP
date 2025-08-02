@@ -5,9 +5,9 @@ namespace ELECON.Application.Feature.User.Command;
 
 public class UserRegisterCommand: IRequest<CheckUserRegisterStatus>
 {
-    public LoginUserDto RegisterUserDto { get; set; }
+    public RegisterUserDto RegisterUserDto { get; set; }
 
-    public UserRegisterCommand(LoginUserDto registerUserDto)
+    public UserRegisterCommand(RegisterUserDto registerUserDto)
     {
         RegisterUserDto = registerUserDto;
     }

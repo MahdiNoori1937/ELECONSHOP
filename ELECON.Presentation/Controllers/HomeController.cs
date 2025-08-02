@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ELECON.Presentation.Controllers;
 
-public class HomeController : Controller
+public class HomeController(IMediator mediator) : BaseController(mediator)
 {
 
     public IActionResult Home()

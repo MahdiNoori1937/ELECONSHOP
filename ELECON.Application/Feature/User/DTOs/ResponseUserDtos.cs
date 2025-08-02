@@ -2,7 +2,7 @@
 
 public enum CheckUserRegisterStatus
 {
-
+    InputExists,
     EmailNotRegistered,
     Success
 }

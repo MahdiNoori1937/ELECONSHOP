@@ -9,10 +9,10 @@
     <ItemGroup>
       <Folder Include="Feature\User\MappingProfiles\" />
       <Folder Include="Feature\User\Queries\" />
-      <Folder Include="Feature\User\Validators\" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="12.0.0" />
       <PackageReference Include="MediatR" Version="13.0.0" />
     </ItemGroup>
 

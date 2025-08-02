@@ -187,7 +187,7 @@ function SwalConfirmChangeNoReload(url, e, id) {
                             $("#rowLink_" + id).hide('slow')
 
                         }, 1000)
-                        
+
                     } else {
                         Swal.fire({
                             title: "خطا",
@@ -225,9 +225,9 @@ function SwalConfirmChangeReloadWithHide(url, e, id) {
                         });
                         $("#rowLink_" + id).hide('slow')
                         setTimeout(() => {
-                           location.reload()
+                            location.reload()
                         }, 1500)
-                        
+
                     } else {
                         Swal.fire({
                             title: "خطا",
@@ -422,7 +422,7 @@ function AddDisLikeReactionToComment(url, id) {
 }
 
 async function ChangeOrderDetailCount(id) {
-    const input = document.querySelector('#Counter-Count-'+id);
+    const input = document.querySelector('#Counter-Count-' + id);
     let value = parseInt(input.value, 10);
 
     if (value > 100) {
@@ -430,15 +430,12 @@ async function ChangeOrderDetailCount(id) {
     } else if (value < 1) {
         input.value = 1;
     }
-    const OrderDetailValue = document.querySelector('#Counter-Count-'+id);
+    const OrderDetailValue = document.querySelector('#Counter-Count-' + id);
     const Response = await fetch(`/UserOrder/ChangeOrderDetailCount?OrderDetailId=${id}&Count=${value}`);
     const result = await Response.json();
-    if (result.status === 200)
-    {
+    if (result.status === 200) {
         location.reload()
-    }
-    else
-    {
+    } else {
         Swal.fire({
             title: "عملیات نا موفق",
             text: result.message,
@@ -446,31 +443,27 @@ async function ChangeOrderDetailCount(id) {
         });
     }
 }
-function SetPaymentValue(Id)
-{
+
+function SetPaymentValue(Id) {
     const SelectedPayment = document.querySelector('.Payment')
-        SelectedPayment.value = Id
+    SelectedPayment.value = Id
 }
- function SendPaymentValue(e)
-{
+
+function SendPaymentValue(e) {
     e.preventDefault()
     const PaymentValue = document.querySelector('.Payment');
     let Value = parseInt(PaymentValue.value, 10);
-    if (isNaN(Value))
-    {
-      swal.fire({
+    if (isNaN(Value)) {
+        swal.fire({
             title: "عملیات ناموفق",
-            text:"لطفا درگاه بانکی راانتخاب کنید",
+            text: "لطفا درگاه بانکی راانتخاب کنید",
             icon: `warning`,
         })
     }
     fetch(`/UserCart/UserOrderPayment?PaymentGateWay=${Value}`).then(res => res.json()).then(Response => {
-        if (Response.status === 200)
-        {
-            document.location.href=Response.url
-        }
-        else
-        {
+        if (Response.status === 200) {
+            document.location.href = Response.url
+        } else {
             swal.fire({
                 title: "عملیات ناموفق",
                 text: Response.message,
@@ -478,25 +471,32 @@ function SetPaymentValue(Id)
             })
         }
     })
-  
-   
+
+
 }
-function RegisterValidation(e)
-{
+
+function RegisterValidation(e) {
     e.preventDefault();
-    const RegisterInput =document.querySelector('#Register-input').value;
+    const RegisterInput = document.querySelector('#username').value;
+    const pass = document.querySelector('#User-Pass').value;
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^(\+98|0)?9\d{9}$/;
-
-
-    if (!emailRegex.test(RegisterInput) && !phoneRegex.test(RegisterInput))
-    {
+    
+    if (!emailRegex.test(RegisterInput) && !phoneRegex.test(RegisterInput)) {
         swal.fire({
             title: "عملیات ناموفق",
             text: "لطفا به صورت موبایل یا ایمیل وارد کنید",
             icon: `warning`
         })
+        return
     }
-    
+    if (pass.length < 5 ) 
+    {
+        swal.fire({
+            title: "عملیات ناموفق",
+            text: "لطفا رمز عبور خود را بیشتر از 5 کلمه وارد کنید",
+            icon: `warning`
+        }) 
+    }
 }

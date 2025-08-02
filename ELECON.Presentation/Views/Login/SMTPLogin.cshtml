@@ -29,6 +29,9 @@
                                             <div class="alert text-center alert-success">
                                                 یک کد برای شما پیامک شد لطفا آن را وارد کنید
                                             </div>
+                                            <div class="inline-btn-text">
+                                                <a asp-controller="Login" asp-action="PasswordLogin" class="btn border-0 main-color-one-bg">ورود با رمز عبور</a>
+                                            </div>
 
                                             <div id="otp-input">
                                                 <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
@@ -38,8 +41,11 @@
                                                 <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
                                                 <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
                                                 <input id="otp-value" placeholder="_" type="hidden" name="otp" />
+                                                <div class="inline-btn-text">
+                                                    <a asp-controller="Login" asp-action="PasswordLogin" class="btn border-0 main-color-one-bg">ورود با رمز عبور</a>
+                                                </div>
                                             </div>
-
+                                            
 
                                             <!-- Countdown timer html -->
                                             <div class="countDownContainer">
