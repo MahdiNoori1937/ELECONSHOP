@@ -16,22 +16,25 @@ public class UserRepository:IUserRepository
         _db = new SqlConnection(config.GetConnectionString("ELECON_SHOPConnectionStrings"));
     }
 
-    public async Task<string> Add(User parameter)
+    public async Task<(string result, int id)> Add(User parameter)
     {
         DynamicParameters parameters = new();
-        parameters.Add("@RoleId", parameter.RoleId);
-        parameters.Add("@Email", parameter.Email,DbType.String);
-        parameters.Add("@Password", parameter.Pasword,DbType.String);
-        parameters.Add("@FirstName", parameter.FirstName,DbType.String);
-        parameters.Add("@LastName", parameter.LastName,DbType.String);
-        parameters.Add("@PhoneNumber", parameter.PhoneNumber,DbType.String);
-        parameters.Add("@UserStatus", parameter.UserStatus,DbType.String);
-        parameters.Add("@UserProfileImage", parameter.UserProfileImage,DbType.String);
-        parameters.Add("@Result",null,DbType.String, ParameterDirection.Output);
+        parameters.Add("@RoleId", parameter.RoleId,DbType.Int32);
+        parameters.Add("@Email", parameter.Email, DbType.String, ParameterDirection.Input,size:200);
+        parameters.Add("@Password", parameter.Pasword, DbType.String, ParameterDirection.Input,size:200);
+        parameters.Add("@FirstName", parameter.FirstName, DbType.String, ParameterDirection.Input,size:50);
+        parameters.Add("@LastName", parameter.LastName, DbType.String, ParameterDirection.Input,size:50);
+        parameters.Add("@PhoneNumber", parameter.PhoneNumber, DbType.String, ParameterDirection.Input,size:20);
+        parameters.Add("@UserStatus", parameter.UserStatus, DbType.String, ParameterDirection.Input,size:50);
+        parameters.Add("@UserProfileImage", parameter.UserProfileImage, DbType.String, ParameterDirection.Input,size:200);
+        parameters.Add("@Result",null,DbType.String, ParameterDirection.Output,size:50);
+        parameters.Add("@ID",null,DbType.Int32, ParameterDirection.Output);
         
-        await _db.ExecuteAsync("dbo.sp_CreateUser", parameters, commandType: CommandType.StoredProcedure);
-        
-        return parameters.Get<string>("@Result");
+        await _db.ExecuteAsync("Add_User",param:parameters,commandType:CommandType.StoredProcedure);
+
+        string result = parameters.Get<string>("@Result");
+        int Id = parameters.Get<int>("@ID");
+        return (result, Id);
     }
 
     public async Task<string> Update(User parameter)

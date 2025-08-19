@@ -1,14 +1,44 @@
-﻿namespace ELECON.Application.Feature.User.DTOs;
+﻿using System.ComponentModel;
+
+namespace ELECON.Application.Feature.User.DTOs;
 
 public enum CheckUserRegisterStatus
 {
     InputExists,
-    EmailNotRegistered,
+    Success,
+    Failed
+}
+
+public enum UserRegisterStatus
+{
+    EmailExists,
+    Success,
+    Failed,
+    RoleNotExists,
+    PhoneNumberExists,
+}
+public enum AddUserSecurityStatus
+{
+    UserNotFound,
+    Failed,
     Success
 }
 
-public enum LoginUserStatus
+public enum UserSMTPLoginStatus
 {
-    
+    UserNotFound,
+    UserLockout,
+    UserGotTimeOut,
+    SMTPCodeFailed,
+    Success
+}
+public enum UserPasswordLoginStatus
+{
+    UserNotFound,
+    UserLockout,
+    UserGotTimeOut,
+    PasswordError,
+    PasswordNotSet,
+    Success
 }
 

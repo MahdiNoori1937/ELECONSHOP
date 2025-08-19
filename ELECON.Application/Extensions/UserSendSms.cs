@@ -11,7 +11,7 @@ public  class UserSendSms
     {
         _smsSenderService = smsSenderService;
     }
-    public  async Task SendSms(User user, string code)
+    public  async Task Send(User user, string code)
     {
         
         string message = "";

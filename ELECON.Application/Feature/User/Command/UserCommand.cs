@@ -5,15 +5,29 @@ namespace ELECON.Application.Feature.User.Command;
 
 public class UserRegisterCommand: IRequest<CheckUserRegisterStatus>
 {
-    public RegisterUserDto RegisterUserDto { get; set; }
+    public UserRegisterUserDto UserRegisterUserDto { get; set; }
 
-    public UserRegisterCommand(RegisterUserDto registerUserDto)
+    public UserRegisterCommand(UserRegisterUserDto userRegisterUserDto)
     {
-        RegisterUserDto = registerUserDto;
+        UserRegisterUserDto = userRegisterUserDto;
     }
 }
 
-public class LoginUserDtoCommand
+public class LoginUserWithSMTPDtoCommand:IRequest<UserSMTPLoginStatus>
 {
-    
+    public UserLoginSMTPCodeDto SmtpCodeDto { get; set; }
+
+    public LoginUserWithSMTPDtoCommand(UserLoginSMTPCodeDto smtpCodeDto)
+    {
+        SmtpCodeDto = smtpCodeDto;
+    }
+} 
+public class LoginUserPasswordDtoCommand:IRequest<UserPasswordLoginStatus>
+{
+    public UserLoginPasswordDto PasswordDto { get; set; }
+
+    public LoginUserPasswordDtoCommand(UserLoginPasswordDto passwordDto)
+    {
+        PasswordDto = passwordDto;
+    }
 } 

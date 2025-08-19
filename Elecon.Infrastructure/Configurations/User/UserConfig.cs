@@ -19,7 +19,7 @@ public class UserConfig:IEntityTypeConfiguration<ELECON.Domain.Entities.User.Use
        builder.Property(c=>c.Email).IsRequired(false).HasMaxLength(100);
        builder.Property(c=>c.UserProfileImage).IsRequired(false).HasMaxLength(200);
        builder.Property(c=>c.UserStatus).IsRequired().HasMaxLength(15);
-       builder.Property(c=>c.PhoneNumber).IsRequired().HasMaxLength(50);
+       builder.Property(c=>c.PhoneNumber).IsRequired(false).HasMaxLength(50);
 
 
        #region Relations

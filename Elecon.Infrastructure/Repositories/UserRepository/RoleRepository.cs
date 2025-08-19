@@ -16,17 +16,21 @@ public class RoleRepository:IRoleRepository
         _db = new SqlConnection(config.GetConnectionString("ELECON_SHOPConnectionStrings"));
     }
     
-    public async Task<string> Add(Role parameter)
+    public async Task<(string result, int id)> Add(Role parameter)
     {
         DynamicParameters parameters = new ();
         parameters.Add("@CreateDate", parameter.CreateDate, DbType.DateTime);
         parameters.Add("@IsDelete", parameter.IsDelete, DbType.Boolean);
         parameters.Add("@Title", parameter.Title, DbType.String);
         parameters.Add("@Result",null,DbType.String, ParameterDirection.Output);
+        parameters.Add("@ID",null,DbType.Int32, ParameterDirection.Output);
         
-        await _db.ExecuteAsync("dbo.sp_CreateUser", parameters, commandType: CommandType.StoredProcedure);
+        await _db.ExecuteAsync("Add_UserSecurity", parameters, commandType: CommandType.StoredProcedure);
+
+        string result = parameters.Get<string>("@Result");
+        int Id = parameters.Get<int>("@Id");
+        return (result, Id);
         
-        return parameters.Get<string>("@Result");
     }
 
     public async Task<string> Update(Role parameter)

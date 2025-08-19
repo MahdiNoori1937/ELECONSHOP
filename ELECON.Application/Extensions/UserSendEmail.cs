@@ -13,7 +13,7 @@ public class UserSendEmail
         _emailSender = emailSender;
     }
 
-    public async Task SendSms(User user, string code)
+    public async Task Send(User user, string code)
     {
         string message = "";
         if (user.FirstName != null || user.LastName != null)

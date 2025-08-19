@@ -15,7 +15,7 @@ public class UserLoginHistoryRepository:IUserLoginHistoryRepository
     {
         _db = new SqlConnection(config.GetConnectionString("ELECON_SHOPConnectionStrings"));
     }
-    public async Task<string> Add(UserLoginHistory parameter)
+    public async Task<(string result, int id)> Add(UserLoginHistory parameter)
     {
         DynamicParameters parameters = new ();
         parameters.Add("@UserId", parameter.UserId, DbType.Int32);
@@ -23,12 +23,13 @@ public class UserLoginHistoryRepository:IUserLoginHistoryRepository
         parameters.Add("@IsSuccess", parameter.IsSuccess, DbType.Boolean);
         parameters.Add("@LogTime", parameter.LogTime, DbType.DateTime);
         
+        parameters.Add("@ID",null,DbType.Int32, ParameterDirection.Output);
         
-        parameters.Add("@Result",null,DbType.String, ParameterDirection.Output);
-        
-        await _db.ExecuteAsync("dbo.sp_CreateUser", parameters, commandType: CommandType.StoredProcedure);
-        
-        return parameters.Get<string>("@Result");
+        await _db.ExecuteAsync("Add_UserSecurity", parameters, commandType: CommandType.StoredProcedure);
+
+        string result = parameters.Get<string>("@Result");
+        int Id = parameters.Get<int>("@Id");
+        return (result, Id);
     }
 
     public async Task<string> Update(UserLoginHistory parameter)

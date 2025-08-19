@@ -497,6 +497,44 @@ function RegisterValidation(e) {
             title: "عملیات ناموفق",
             text: "لطفا رمز عبور خود را بیشتر از 5 کلمه وارد کنید",
             icon: `warning`
-        }) 
+        })
+        return
     }
+    const  sender = document.getElementById('FormSender')
+     console.log(sender.submit())
+    
+}
+
+function OnsuccessRegisterUser(Result)
+{
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^(\+98|0)?9\d{9}$/;
+    if (Result && Result.status === 200)
+    {
+        swal.fire({
+            title: "عملیات ناموفق",
+            text: Result.message,
+            icon: `warning`
+        })
+        return
+    }
+    if (emailRegex.test(Result.message))
+    {
+
+        swal.fire({
+            title: "عملیات ناموفق",
+            text: "ایمیل قبلا در سایت ثبت شده است",
+            icon: `warning`
+        })
+    }
+    else
+    {
+        swal.fire({
+            title: "عملیات ناموفق",
+            text: "شماره همراه قبلا در سایت ثبت شده است",
+            icon: `warning`
+        })
+    }
+    
 }

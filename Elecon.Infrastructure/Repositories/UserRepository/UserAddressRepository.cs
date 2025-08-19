@@ -16,7 +16,7 @@ public class UserAddressRepository:IUserAddressRepository
         _db = new SqlConnection(config.GetConnectionString("ELECON_SHOPConnectionStrings"));
     }
     
-    public async Task<string> Add(UserAddress parameter)
+    public async Task<(string result, int id)> Add(UserAddress parameter)
     {
         DynamicParameters parameters = new ();
         parameters.Add("@CreateDate", parameter.CreateDate, DbType.DateTime);
@@ -26,14 +26,14 @@ public class UserAddressRepository:IUserAddressRepository
         parameters.Add("@PostalCode", parameter.PostalCode, DbType.String);
         parameters.Add("@FullAddress", parameter.FullAddress, DbType.String);
         parameters.Add("@Title", parameter.Title, DbType.String);
-        parameters.Add("@UserId", parameter.UserId, DbType.Int32);
+        parameters.Add("@Id", parameter.UserId, DbType.Int32);
         
         
         parameters.Add("@Result",null,DbType.String, ParameterDirection.Output);
         
         await _db.ExecuteAsync("dbo.sp_CreateUser", parameters, commandType: CommandType.StoredProcedure);
         
-        return parameters.Get<string>("@Result");
+        return (parameters.Get<string>("@RESULT"), parameters.Get<int>("@Id"));
     }
 
     public async Task<string> Update(UserAddress parameter)

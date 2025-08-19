@@ -5,5 +5,6 @@ namespace ELECON.Domain.Interface.IUserRepository;
 
 public interface IUserSecurityRepository:ISharedRepository<UserSecurity>
 {
-    
+    Task<UserSecurity> GetUserSecurityByInput(string input);
+
 }

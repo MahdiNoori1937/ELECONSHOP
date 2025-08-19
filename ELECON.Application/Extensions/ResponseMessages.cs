@@ -118,7 +118,8 @@ public class ResponseMessages
         public static string  ProductSweeperDuplicate = "محصول نمایشی برای دسته بندی تکراری است";
         public static string  ProductSweeperNotFound = "محصول نمایشی پیدا نشد";
         public static string  BannerNotFound = "بنر پیدا نشد";
-        public static string  EmailNotRegistered = "ایمیل ثبت نشده است لطفا با شماره موبایل خود ثبت نام کنید";
+        public static string  UserGotTimeOut = "به علت تلاش های مکرر 3 دقیقه دیگر وارد شوید";
+        public static string SMTPError = "کد ارسالی یکبار مصرف صحیح نمیاشد";
 
     
        
