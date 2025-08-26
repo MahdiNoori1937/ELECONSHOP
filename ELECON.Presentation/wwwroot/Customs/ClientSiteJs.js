@@ -500,14 +500,12 @@ function RegisterValidation(e) {
         })
         return
     }
-    const  sender = document.getElementById('FormSender')
-     console.log(sender.submit())
     
+    $("#FormSender").submit()
 }
 
 function OnsuccessRegisterUser(Result)
 {
-    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^(\+98|0)?9\d{9}$/;
     if (Result && Result.status === 200)
@@ -517,6 +515,7 @@ function OnsuccessRegisterUser(Result)
             text: Result.message,
             icon: `warning`
         })
+        location.href = Response.link
         return
     }
     if (emailRegex.test(Result.message))
@@ -537,4 +536,11 @@ function OnsuccessRegisterUser(Result)
         })
     }
     
+}
+
+function Submiter(e)
+{
+    e.preventDefault()
+    const otp = document.querySelector('#otp-value')
+    console.log(otp.value())
 }

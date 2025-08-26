@@ -34,6 +34,8 @@ public enum UserSMTPLoginStatus
 }
 public enum UserPasswordLoginStatus
 {
+    UserNotActive,
+    UserBanned,
     UserNotFound,
     UserLockout,
     UserGotTimeOut,

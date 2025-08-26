@@ -6,4 +6,6 @@ namespace ELECON.Domain.Interface.IUserRepository;
 public interface IUserRepository:ISharedRepository<User>
 {
     Task<User> FindByEmailOrNumberAsync(string input);
+    
+    Task<string> ChangeUserStatus(int userId, string status);
 }

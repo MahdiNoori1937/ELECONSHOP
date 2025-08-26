@@ -1,4 +1,5 @@
-﻿using ELECON.Application.Feature.User.Command;
+﻿using ELECON.Application.Extensions;
+using ELECON.Application.Feature.User.Command;
 using ELECON.Application.Feature.User.DTOs;
 using ELECON.Domain.Entities.User;
 using ELECON.Domain.Interface.IUserRepository;
@@ -22,6 +23,7 @@ public class UserLoginSMTPHandler : IRequestHandler<LoginUserWithSMTPDtoCommand,
     {
         UserSecurity userSecurity =
             await _userSecurityRepository.GetUserSecurityByInput(request.SmtpCodeDto.RegisterInput);
+       
         if (userSecurity == null)
         {
             return UserSMTPLoginStatus.UserNotFound;
@@ -40,6 +42,7 @@ public class UserLoginSMTPHandler : IRequestHandler<LoginUserWithSMTPDtoCommand,
             {
                 userSecurity.LockoutEnd = DateTime.Now.AddMinutes(3);
                 userSecurity.IsLockedOut = true;
+                await _userRepository.ChangeUserStatus(userSecurity.UserId, UserStatus.Inactive.GetDisplayName());
                 await _userSecurityRepository.Update(userSecurity);
                 return UserSMTPLoginStatus.UserGotTimeOut;
             }
@@ -47,7 +50,7 @@ public class UserLoginSMTPHandler : IRequestHandler<LoginUserWithSMTPDtoCommand,
             await _userSecurityRepository.Update(userSecurity);
             return UserSMTPLoginStatus.SMTPCodeFailed;
         }
-
+        await _userRepository.ChangeUserStatus(userSecurity.UserId, UserStatus.Active.GetDisplayName());
         userSecurity.FailedLoginAttempts = 0;
         userSecurity.LockoutEnd = null;
         userSecurity.IsLockedOut = false;

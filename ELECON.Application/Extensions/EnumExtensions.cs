@@ -5,6 +5,14 @@ namespace ELECON.Application.Extensions;
 
 public static class EnumExtensions
 {
+    public static string GetDisplayName(this Enum enumValue)
+    {
+        return enumValue.GetType()
+            .GetMember(enumValue.ToString())
+            .First()
+            .GetCustomAttribute<DisplayAttribute>()
+            .GetName();
+    }
     public static TEnum? GetEnumValueFromDisplayName<TEnum>(string displayName) where TEnum : struct, Enum
     {
         foreach (var field in typeof(TEnum).GetFields())

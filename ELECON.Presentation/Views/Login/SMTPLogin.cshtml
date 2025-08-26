@@ -1,4 +1,4 @@
-﻿
+﻿@model ELECON.Application.Feature.User.DTOs.UserLoginSMTPCodeDto
 @{
     Layout = "_LoginLayout";
 }
@@ -24,47 +24,46 @@
                                                 <img src="/Customer/img/logo.png" width="200" alt="">
                                             </a>
                                         </div>
-                                        <div class="auth-form bg-white">
+                                        <form
+                                            class="smtp-sender"
+                                            asp-action="SMTPLogin_P"
+                                            method="post"
+                                            data-ajax="true"
+                                            data-ajax-method="post"
+                                            data-ajax-success="OnsuccessSendNoModal"
+                                        >
+                                            <input type="hidden" asp-for="SMTPCode" class="Code-Smtp"/>
+                                            <input type="hidden" asp-for="RegisterInput" />
+                                            <div class="auth-form bg-white">
 
-                                            <div class="alert text-center alert-success">
-                                                یک کد برای شما پیامک شد لطفا آن را وارد کنید
-                                            </div>
-                                            <div class="inline-btn-text">
-                                                <a asp-controller="Login" asp-action="PasswordLogin" class="btn border-0 main-color-one-bg">ورود با رمز عبور</a>
-                                            </div>
-
-                                            <div id="otp-input">
-                                                <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
-                                                <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
-                                                <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
-                                                <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
-                                                <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
-                                                <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*" />
-                                                <input id="otp-value" placeholder="_" type="hidden" name="otp" />
-                                                <div class="inline-btn-text">
-                                                    <a asp-controller="Login" asp-action="PasswordLogin" class="btn border-0 main-color-one-bg">ورود با رمز عبور</a>
+                                                <div class="alert text-center alert-success">
+                                                    یک کد برای شما پیامک شد لطفا آن را وارد کنید
                                                 </div>
-                                            </div>
-                                            
 
-                                            <!-- Countdown timer html -->
-                                            <div class="countDownContainer">
-                                                <div class="countdown-bar" id="countdownB">
-                                                    <div></div>
-                                                    <div></div>
+                                                <div id="otp-input">
+                                                    <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*"/>
+                                                    <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*"/>
+                                                    <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*"/>
+                                                    <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*"/>
+                                                    <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*"/>
+                                                    <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no" pattern="\d*"/>
+                                                    <input id="otp-value" placeholder="_" type="hidden" name="otp"/>
                                                 </div>
+                                                <div class="countDownContainer">
+                                                    <div class="countdown-bar" id="countdownB">
+                                                        <div></div>
+                                                        <div></div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mt-4">
+                                                    <button  type="submit" onclick="Submiter(event)" id="submit" class="btn main-color-one-bg d-block w-100 py-3">وورد به
+                                                        سایت
+                                                    </button>
+                                                </div>
+                                                <p class="loginTermsDesc mt-4">ورود شما به معنای پذیرش<a class="mx-1 inline-block main-color-one-color" href="/page/terms/">شرایط راستچین</a>و<a class="mx-1 inline-block main-color-one-color" href="/page/privacy/">قوانین حریم‌خصوصی</a>است</p>
                                             </div>
-
-
-                                            <div class="form-group mt-4">
-                                                <button type="submit" id="submit" class="btn main-color-one-bg d-block w-100 py-3">وورد به
-                                                    سایت
-                                                </button>
-                                            </div>
-
-                                            <p class="loginTermsDesc mt-4">ورود شما به معنای پذیرش<a class="mx-1 inline-block main-color-one-color" href="/page/terms/">شرایط راستچین</a>و<a class="mx-1 inline-block main-color-one-color" href="/page/privacy/">قوانین حریم‌خصوصی</a>است</p>
-
-                                        </div>
+                                        </form>
+                                     
                                     </div>
                                 </div>
                             </div>

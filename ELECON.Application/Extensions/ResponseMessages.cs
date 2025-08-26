@@ -74,6 +74,7 @@ public class ResponseMessages
         public static string EmialIsInUse = "ایمیل قبلا استفاده شده است";
         public static string NationalCodeInUse = "کد ملی قبلا استفاده شده است";
         public static string MobileIsInUse = "تلفن همراه قبلا استفاده شده است";
+        public static string InputIsInUse = "اطلاعات وارد شده قبلا در سایت ثبت نام شده است";
         public static string RoleNotFound = "نقش پیدا نشد";
         public static string TopCategoryNotFound = "بالا دسته پیدا نشد";
         public static string ImageNotFound = "عکس محصول پیدا نشد";

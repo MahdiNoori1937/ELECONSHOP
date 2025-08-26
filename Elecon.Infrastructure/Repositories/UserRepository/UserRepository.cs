@@ -84,6 +84,21 @@ public class UserRepository:IUserRepository
             parameters, commandType: CommandType.StoredProcedure);
         return user.FirstOrDefault();
     }
+    
+    #endregion
+
+    #region MyRegion
+
+    public async Task<string> ChangeUserStatus(int userId, string status)
+    {
+        
+        DynamicParameters parameters = new();
+        parameters.Add("@Id", userId,DbType.Int32);
+        parameters.Add("@status",null,DbType.String, ParameterDirection.Output);
+        parameters.Add("@Result",null,DbType.String, ParameterDirection.Output);
+        await _db.ExecuteAsync("Update_UserStatus", parameters, commandType: CommandType.StoredProcedure);
+        return parameters.Get<string>("@Result");
+    }
 
     #endregion
 }

@@ -17,9 +17,9 @@ public class LoginController(IMediator mediator) : BaseController(mediator)
     }  
 
     [HttpPost("/Register_p")]
-    public async Task<IActionResult> Register_p(UserRegisterUserDto Model)
+    public async Task<IActionResult> Register_p(UserRegisterUserDto model)
     {
-        string? error = await ValidateModel(new UserRegisterValidator(), Model);
+        string? error = await ValidateModel(new UserRegisterValidator(), model);
         if (error != null)
         {
             return Ok(new
@@ -30,7 +30,7 @@ public class LoginController(IMediator mediator) : BaseController(mediator)
             });
         }
 
-        CheckUserRegisterStatus status = await mediator.Send(new UserRegisterCommand(Model));
+        CheckUserRegisterStatus status = await mediator.Send(new UserRegisterCommand(model));
             switch (status)
             {
                 case CheckUserRegisterStatus.InputExists:
@@ -38,10 +38,11 @@ public class LoginController(IMediator mediator) : BaseController(mediator)
                     return Ok(new
                     {
                         status = 403,
-                        message = Model.RegisterInput,
+                        message = model.RegisterInput,
                         type = "error"
                     });
                 }
+                
                 
                 case CheckUserRegisterStatus.Success:
                     return Ok(new
@@ -49,7 +50,7 @@ public class LoginController(IMediator mediator) : BaseController(mediator)
                         status = 200,
                         message = ResponseMessages.SuccessMessages.SentSMTPCodeForLogin,
                         type = "success",
-                        link=Url.Action("SMTPLogin", "Login",new {input=Model.RegisterInput})
+                        link=Url.Action("SMTPLogin", "Login",new {input=model.RegisterInput})
                     });
                 default:
                     return Ok(new
