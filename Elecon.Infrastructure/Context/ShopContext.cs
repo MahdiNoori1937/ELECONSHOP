@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Elecon.Infrastructure.ShopContext;
+namespace Elecon.Infrastructure.Context;
 
 public class ShopContext:DbContext
 {

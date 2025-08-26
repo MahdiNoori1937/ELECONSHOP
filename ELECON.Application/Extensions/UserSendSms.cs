@@ -1,5 +1,5 @@
 ﻿using ELECON.Domain.Entities.User;
-using ELECON.Domain.Interface.SmsSender;
+using ELECON.Domain.Interface.ISmsSenderRepository;
 
 namespace ELECON.Application.Extensions;
 

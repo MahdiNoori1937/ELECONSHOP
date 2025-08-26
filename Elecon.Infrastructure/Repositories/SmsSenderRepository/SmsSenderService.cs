@@ -1,13 +1,13 @@
 ﻿using System.Net;
 using System.Text;
-using ELECON.Domain.Interface.SmsSender;
+using ELECON.Domain.Interface.ISmsSenderRepository;
 using Elecon.Infrastructure.Send;
 using EleconShop.Domain.Dtos;
 using Microsoft.Extensions.Options;
 using mpNuget;
 using Newtonsoft.Json;
 
-namespace Elecon.Infrastructure.Repositories.SmsSenderRepositories;
+namespace Elecon.Infrastructure.Repositories.SmsSenderRepository;
 
 public class SmsSenderService: ISmsSenderService
 {

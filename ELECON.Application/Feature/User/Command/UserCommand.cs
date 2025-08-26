@@ -1,4 +1,5 @@
-﻿using ELECON.Application.Feature.User.DTOs;
+﻿using System.Security.Claims;
+using ELECON.Application.Feature.User.DTOs;
 using MediatR;
 
 namespace ELECON.Application.Feature.User.Command;
@@ -30,4 +31,14 @@ public class LoginUserPasswordDtoCommand:IRequest<UserPasswordLoginStatus>
     {
         PasswordDto = passwordDto;
     }
-} 
+}
+
+public class GetUserClaimsCommand : IRequest<List<Claim>>
+{
+    public string Input { get; set; }
+
+    public GetUserClaimsCommand(string input)
+    {
+        Input = input;
+    }
+}

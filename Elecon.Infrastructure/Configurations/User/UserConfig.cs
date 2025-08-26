@@ -16,12 +16,15 @@ public class UserConfig:IEntityTypeConfiguration<ELECON.Domain.Entities.User.Use
        builder.Property(c=>c.FirstName).IsRequired(false).HasMaxLength(50);
        builder.Property(c=>c.LastName).IsRequired(false).HasMaxLength(50);
        builder.Property(c=>c.Pasword).IsRequired(false).HasMaxLength(300);
-       builder.Property(c=>c.Email).IsRequired(false).HasMaxLength(100);
+       builder.Property(c=>c.Email).IsRequired(false).HasMaxLength(100).IsUnicode();
        builder.Property(c=>c.UserProfileImage).IsRequired(false).HasMaxLength(200);
        builder.Property(c=>c.UserStatus).IsRequired().HasMaxLength(15);
        builder.Property(c=>c.PhoneNumber).IsRequired(false).HasMaxLength(50);
 
 
+       builder.HasIndex(c=>c.Email).IsUnique();
+       builder.HasIndex(c=>c.PhoneNumber).IsUnique();
+       
        #region Relations
        builder.HasOne(c=>c.Role).WithMany(c=>c.Users).HasForeignKey(c=>c.RoleId);
        

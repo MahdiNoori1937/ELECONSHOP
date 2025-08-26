@@ -23,6 +23,7 @@ public class UserSecurityRepository:IUserSecurityRepository
         parameters.Add("@LastFailedLogin", parameter.LastFailedLogin, DbType.DateTime);
         parameters.Add("@IsLockedOut", parameter.IsLockedOut, DbType.Boolean);
         parameters.Add("@FailedLoginAttempts", parameter.FailedLoginAttempts, DbType.Int32);
+        parameters.Add("@SmtpCode", parameter.SMTPCode, DbType.Int32);
         parameters.Add("@Result",null,DbType.String, ParameterDirection.Output,size:50);
         parameters.Add("@Id",null,DbType.Int32, ParameterDirection.Output);
         
@@ -37,20 +38,18 @@ public class UserSecurityRepository:IUserSecurityRepository
     public async Task<string> Update(UserSecurity parameter)
     {
         DynamicParameters parameters = new ();
-        parameters.Add("@id", parameter.Id, DbType.Int32);
         parameters.Add("@UserId", parameter.UserId, DbType.Int32);
         parameters.Add("@LockoutEnd", parameter.LockoutEnd, DbType.DateTime);
         parameters.Add("@LastFailedLogin", parameter.LastFailedLogin, DbType.DateTime);
         parameters.Add("@IsLockedOut", parameter.IsLockedOut, DbType.Boolean);
+        parameters.Add("@SmtpCode", parameter.SMTPCode, DbType.Int32);
         parameters.Add("@FailedLoginAttempts", parameter.FailedLoginAttempts, DbType.Int32);
-       
         
+        parameters.Add("@STATUS",null,DbType.String, ParameterDirection.Output,size:50);
         
-        parameters.Add("@Result",null,DbType.String, ParameterDirection.Output);
+        await _db.ExecuteAsync("Update_UserSecurity", parameters, commandType: CommandType.StoredProcedure);
         
-        await _db.ExecuteAsync("dbo.sp_CreateUser", parameters, commandType: CommandType.StoredProcedure);
-        
-        return parameters.Get<string>("@Result");
+        return parameters.Get<string>("@STATUS");
     }
 
     public async Task<string> Delete(int id)
@@ -75,7 +74,7 @@ public class UserSecurityRepository:IUserSecurityRepository
     public async Task<UserSecurity> GetUserSecurityByInput(string input)
     {
         DynamicParameters parameters = new();
-        parameters.Add("@input", input,DbType.Int32);
+        parameters.Add("@input", input,DbType.String);
         IEnumerable<UserSecurity> userSecurity = await _db.QueryAsync<UserSecurity>("Get_UserSecurityByInput", parameters, commandType: CommandType.StoredProcedure);
         return userSecurity.FirstOrDefault();
     }

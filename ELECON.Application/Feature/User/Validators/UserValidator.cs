@@ -29,7 +29,7 @@ public class UserSendSmtpValidator : AbstractValidator<UserLoginSMTPCodeDto>
             .WithMessage("لطفا کد ارسالی را وارد کنید")
             .NotEmpty()
             .WithMessage("لطفا کد ارسالی را وارد کنید")
-            .Must(c=> c!=null && c.Length==5).WithMessage("کد ارسالی باید 5 کاراکتر باشد");
+            .Must(c=> c!=null && c.Length==6).WithMessage("کد ارسالی باید 6 کاراکتر باشد");
         
     }
 }

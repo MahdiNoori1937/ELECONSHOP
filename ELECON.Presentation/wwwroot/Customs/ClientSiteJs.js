@@ -511,11 +511,14 @@ function OnsuccessRegisterUser(Result)
     if (Result && Result.status === 200)
     {
         swal.fire({
-            title: "عملیات ناموفق",
+            title: "عملیات موفق",
             text: Result.message,
-            icon: `warning`
+            icon: `success`
         })
-        location.href = Response.link
+        setTimeout(() => {
+            location.href = Result.link
+        }, 2000)
+        
         return
     }
     if (emailRegex.test(Result.message))
@@ -536,11 +539,4 @@ function OnsuccessRegisterUser(Result)
         })
     }
     
-}
-
-function Submiter(e)
-{
-    e.preventDefault()
-    const otp = document.querySelector('#otp-value')
-    console.log(otp.value())
 }

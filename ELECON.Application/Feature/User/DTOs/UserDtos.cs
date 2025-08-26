@@ -20,3 +20,8 @@ public class UserLoginPasswordDto
     
     public string Password { get; set; }
 }
+
+public class UserGetClaimDto
+{
+    public string Input { get; set; }
+}

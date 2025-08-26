@@ -1,4 +1,4 @@
-﻿namespace ELECON.Domain.Interface.SmsSender;
+﻿namespace ELECON.Domain.Interface.ISmsSenderRepository;
 
 public interface ISmsSenderService
 {

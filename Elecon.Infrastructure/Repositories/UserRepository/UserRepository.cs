@@ -94,9 +94,9 @@ public class UserRepository:IUserRepository
         
         DynamicParameters parameters = new();
         parameters.Add("@Id", userId,DbType.Int32);
-        parameters.Add("@status",null,DbType.String, ParameterDirection.Output);
-        parameters.Add("@Result",null,DbType.String, ParameterDirection.Output);
-        await _db.ExecuteAsync("Update_UserStatus", parameters, commandType: CommandType.StoredProcedure);
+        parameters.Add("@status",status,DbType.String);
+        parameters.Add("@Result",null,DbType.String, ParameterDirection.Output,size:50);
+        await _db.ExecuteAsync("User_Update_UserStatus", parameters, commandType: CommandType.StoredProcedure);
         return parameters.Get<string>("@Result");
     }
 

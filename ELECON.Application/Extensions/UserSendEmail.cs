@@ -1,6 +1,5 @@
 ﻿using ELECON.Domain.Entities.User;
 using ELECON.Domain.Interface.IEmailSender;
-using ELECON.Domain.Interface.SmsSender;
 
 namespace ELECON.Application.Extensions;
 

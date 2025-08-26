@@ -4,6 +4,7 @@ using Elecon.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Elecon.Infrastructure.MyDbContext
 {
     [DbContext(typeof(ShopContext))]
-    partial class ShopContextModelSnapshot : ModelSnapshot
+    [Migration("20250826091851_AddSMTPCode")]
+    partial class AddSMTPCode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,7 +47,7 @@ namespace Elecon.Infrastructure.MyDbContext
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles", (string)null);
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("ELECON.Domain.Entities.User.User", b =>
@@ -97,7 +100,7 @@ namespace Elecon.Infrastructure.MyDbContext
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ELECON.Domain.Entities.User.UserAddress", b =>
@@ -146,7 +149,7 @@ namespace Elecon.Infrastructure.MyDbContext
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserAddresses", (string)null);
+                    b.ToTable("UserAddresses");
                 });
 
             modelBuilder.Entity("ELECON.Domain.Entities.User.UserLoginHistory", b =>
@@ -175,7 +178,7 @@ namespace Elecon.Infrastructure.MyDbContext
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserLoginHistories", (string)null);
+                    b.ToTable("UserLoginHistories");
                 });
 
             modelBuilder.Entity("ELECON.Domain.Entities.User.UserNotification", b =>
@@ -207,7 +210,7 @@ namespace Elecon.Infrastructure.MyDbContext
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserNotifications", (string)null);
+                    b.ToTable("UserNotifications");
                 });
 
             modelBuilder.Entity("ELECON.Domain.Entities.User.UserSecurity", b =>
@@ -242,7 +245,7 @@ namespace Elecon.Infrastructure.MyDbContext
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("UserSecurities", (string)null);
+                    b.ToTable("UserSecurities");
                 });
 
             modelBuilder.Entity("ELECON.Domain.Entities.User.User", b =>

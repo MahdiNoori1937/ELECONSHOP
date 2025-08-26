@@ -17,7 +17,7 @@ public class UserRegisterHandler(
     public async Task<CheckUserRegisterStatus> Handle(UserRegisterCommand request, CancellationToken cancellationToken)
     {
         string Input = request.UserRegisterUserDto.RegisterInput;
-        string code = 5.ChooseRandomNumber().ToString();
+        string code = 6.ChooseRandomNumber().ToString();
         Domain.Entities.User.User user =
             await _userRepository.FindByEmailOrNumberAsync(request.UserRegisterUserDto.RegisterInput);
         if (user != null)
