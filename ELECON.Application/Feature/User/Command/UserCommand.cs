@@ -33,12 +33,3 @@ public class LoginUserPasswordDtoCommand:IRequest<UserPasswordLoginStatus>
     }
 }
 
-public class GetUserClaimsCommand : IRequest<List<Claim>>
-{
-    public string Input { get; set; }
-
-    public GetUserClaimsCommand(string input)
-    {
-        Input = input;
-    }
-}

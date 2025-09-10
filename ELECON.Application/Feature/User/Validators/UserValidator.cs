@@ -38,11 +38,11 @@ public class UserPasswordLoginValidator : AbstractValidator<UserLoginPasswordDto
 {
     public UserPasswordLoginValidator()
     {
-        RuleFor(c=>c.RegisterInput).NotNull()
+        RuleFor(c=>c.Input).NotNull()
             .NotEmpty().WithMessage("شماره موبایل یا ایمیل نباید خالی باشد")
             .MaximumLength(200).WithMessage("لطفا کمتر از 200 کاراکتر وارد کنید");
         
-        RuleFor(c=>c.RegisterInput).NotNull()
+        RuleFor(c=>c.Input).NotNull()
             .WithMessage("لطفا رمز عبور را وارد کنید")
             .NotEmpty()
             .WithMessage("لطفا رمز عبور را وارد کنید");

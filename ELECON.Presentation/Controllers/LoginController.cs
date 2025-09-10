@@ -3,6 +3,7 @@ using System.ServiceModel.Channels;
 using ELECON.Application.Extensions;
 using ELECON.Application.Feature.User.Command;
 using ELECON.Application.Feature.User.DTOs;
+using ELECON.Application.Feature.User.Queries;
 using ELECON.Application.Feature.User.Validators;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
@@ -124,7 +125,7 @@ public class LoginController(IMediator mediator) : BaseController(mediator)
                 });
             case UserSMTPLoginStatus.Success:
             {
-                List<Claim> claims = await mediator.Send(new GetUserClaimsCommand(Model.RegisterInput));
+                List<Claim> claims = await mediator.Send(new GetUserClaimsQuery(Model.RegisterInput));
                 ClaimsIdentity identity = new(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 ClaimsPrincipal principal = new(identity);
                 AuthenticationProperties properties = new()
@@ -159,8 +160,98 @@ public class LoginController(IMediator mediator) : BaseController(mediator)
     }
 
     [HttpGet("/PasswordLogin_p)")]
-    public IActionResult PasswordLogin_p()
+    public async Task<IActionResult> PasswordLogin_p(UserLoginPasswordDto model)
     {
-        return View();
-    }
+        string? error = await ValidateModel(new UserPasswordLoginValidator(), model);
+        if (error != null)
+        {
+            return Ok(new
+            {
+                status = 403,
+                message = error,
+                type = "error"
+            });
+        }
+
+        UserPasswordLoginStatus status = await mediator.Send(new LoginUserPasswordDtoCommand(model));
+        switch (status)
+        {
+            case UserPasswordLoginStatus.UserNotActive:
+                return Ok(new
+                {
+                    status = 404,
+                    message = ResponseMessages.WarningMessages.SomethingsGoesWrong,
+                    type = "error"
+                });
+            case UserPasswordLoginStatus.UserBanned:
+                return Ok(new
+                {
+                    status = 404,
+                    message = ResponseMessages.WarningMessages.SomethingsGoesWrong,
+                    type = "error"
+                });
+            case UserPasswordLoginStatus.UserNotFound:
+                return Ok(new
+                {
+                    status = 404,
+                    message = ResponseMessages.WarningMessages.SomethingsGoesWrong,
+                    type = "error"
+                });
+            case UserPasswordLoginStatus.UserLockout:
+                return Ok(new
+                {
+                    status = 404,
+                    message = ResponseMessages.WarningMessages.SomethingsGoesWrong,
+                    type = "error"
+                });
+            case UserPasswordLoginStatus.UserGotTimeOut:
+                return Ok(new
+                {
+                    status = 404,
+                    message = ResponseMessages.WarningMessages.SomethingsGoesWrong,
+                    type = "error"
+                });
+            case UserPasswordLoginStatus.PasswordError:
+                return Ok(new
+                {
+                    status = 404,
+                    message = ResponseMessages.WarningMessages.SomethingsGoesWrong,
+                    type = "error"
+                });
+            case UserPasswordLoginStatus.PasswordNotSet:
+                return Ok(new
+                {
+                    status = 404,
+                    message = ResponseMessages.WarningMessages.SomethingsGoesWrong,
+                    type = "error"
+                });
+            case UserPasswordLoginStatus.Success:
+            {
+                List<Claim> claims = await mediator.Send(new GetUserClaimsQuery(model.Input));
+                ClaimsIdentity identity = new(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                ClaimsPrincipal principal = new(identity);
+                AuthenticationProperties properties = new()
+                {
+                    IsPersistent = true
+                };
+                await HttpContext.SignInAsync(principal,properties);
+                
+                return Ok(new
+                {
+                    status = 404,
+                    message = ResponseMessages.ErrorMessages.UserNotFound,
+                    type = "success",
+                    link= Url.Action("Home", "Home")
+                }); 
+            }
+            default:
+                return Ok(new
+                {
+                    status = 404,
+                    message = ResponseMessages.WarningMessages.SomethingsGoesWrong,
+                    type = "error"
+                });
+        }
+        
+        }
 }

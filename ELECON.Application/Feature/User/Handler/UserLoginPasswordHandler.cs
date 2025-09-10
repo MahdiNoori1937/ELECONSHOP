@@ -23,7 +23,7 @@ public class UserLoginPasswordHandler
         CancellationToken cancellationToken)
     {
         Domain.Entities.User.User user =
-            await _userRepository.FindByEmailOrNumberAsync(request.PasswordDto.RegisterInput);
+            await _userRepository.FindByEmailOrNumberAsync(request.PasswordDto.Input);
         if (user == null)
         {
             return UserPasswordLoginStatus.UserNotFound;

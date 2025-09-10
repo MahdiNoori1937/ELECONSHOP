@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using Dapper;
+using ELECON.Application.Feature.User.DTOs;
 using ELECON.Domain.Entities.User;
 using ELECON.Domain.Interface.IUserRepository;
 using Microsoft.Data.SqlClient;
@@ -98,6 +99,17 @@ public class UserRepository:IUserRepository
         parameters.Add("@Result",null,DbType.String, ParameterDirection.Output,size:50);
         await _db.ExecuteAsync("User_Update_UserStatus", parameters, commandType: CommandType.StoredProcedure);
         return parameters.Get<string>("@Result");
+    }
+    
+    #endregion
+
+    #region FindUserByEmailAndPassword
+
+    public async  Task<UserDetailDto> GetUserDetailById(int userId)
+    {
+        DynamicParameters parameters = new();
+        parameters.Add("@Id", userId,DbType.Int32);
+        return (await _db.QueryAsync<UserDetailDto>("User_GetUserDetail", parameters, commandType: CommandType.StoredProcedure)).FirstOrDefault()?? new UserDetailDto();
     }
 
     #endregion

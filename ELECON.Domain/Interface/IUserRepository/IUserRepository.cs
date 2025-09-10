@@ -1,4 +1,5 @@
-﻿using ELECON.Domain.Entities.User;
+﻿using ELECON.Application.Feature.User.DTOs;
+using ELECON.Domain.Entities.User;
 using ELECON.Domain.Interface.ISharedRepository;
 
 namespace ELECON.Domain.Interface.IUserRepository;
@@ -8,4 +9,6 @@ public interface IUserRepository:ISharedRepository<User>
     Task<User> FindByEmailOrNumberAsync(string input);
     
     Task<string> ChangeUserStatus(int userId, string status);
+    
+    Task<UserDetailDto> GetUserDetailById(int userId);
 }

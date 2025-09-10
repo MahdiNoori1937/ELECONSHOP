@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <Folder Include="Feature\User\MappingProfiles\" />
-      <Folder Include="Feature\User\Queries\" />
     </ItemGroup>
 
     <ItemGroup>

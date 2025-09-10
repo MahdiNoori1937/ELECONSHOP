@@ -1,11 +1,12 @@
 ﻿using System.Security.Claims;
 using ELECON.Application.Feature.User.Command;
+using ELECON.Application.Feature.User.Queries;
 using ELECON.Domain.Interface.IUserRepository;
 using MediatR;
 
 namespace ELECON.Application.Feature.User.Handler;
 
-public class UserGetClaimsHandler:IRequestHandler<GetUserClaimsCommand,List<Claim>>
+public class UserGetClaimsHandler:IRequestHandler<GetUserClaimsQuery,List<Claim>>
 {
     private readonly IUserRepository _userRepository;
 
@@ -13,7 +14,7 @@ public class UserGetClaimsHandler:IRequestHandler<GetUserClaimsCommand,List<Clai
     {
         _userRepository = userRepository;
     }
-    public async Task<List<Claim>> Handle(GetUserClaimsCommand request, CancellationToken cancellationToken)
+    public async Task<List<Claim>> Handle(GetUserClaimsQuery request, CancellationToken cancellationToken)
     {
         Domain.Entities.User.User User = await _userRepository.FindByEmailOrNumberAsync(request.Input);
         List<Claim> Claims = new()
